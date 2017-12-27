@@ -1,4 +1,3 @@
-using System.Text;
 using Xunit;
 
 namespace NBitcoin.Dash.Tests

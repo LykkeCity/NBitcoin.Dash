@@ -50,12 +50,7 @@ namespace NBitcoin.Dash
         {
             get
             {
-                if (_mainnet == null)
-                {
-                    _mainnet = RegisterMainnet();
-                }
-
-                return _mainnet;
+                return _mainnet ?? RegisterMainnet();
             }
         }
 
@@ -63,12 +58,7 @@ namespace NBitcoin.Dash
         {
             get
             {
-                if (_testnet == null)
-                {
-                    _testnet = RegisterTestnet();
-                }
-
-                return _testnet;
+                return _testnet ?? RegisterTestnet();
             }
         }
 
@@ -78,7 +68,7 @@ namespace NBitcoin.Dash
             {
                 var builder = new NetworkBuilder();
 
-                return builder.SetConsensus(new Consensus()
+                _mainnet =  builder.SetConsensus(new Consensus()
                 {
                     SubsidyHalvingInterval = 210240,
                     MajorityEnforceBlockUpgrade = 750,
@@ -122,6 +112,8 @@ namespace NBitcoin.Dash
                     Nonce = 28917698,
                 }))
                 .BuildAndRegister();
+
+                return _mainnet;
             }
         }
 
@@ -131,7 +123,7 @@ namespace NBitcoin.Dash
             {
                 var builder = new NetworkBuilder();
 
-                return builder.SetConsensus(new Consensus()
+                _testnet = builder.SetConsensus(new Consensus()
                 {
                     SubsidyHalvingInterval = 210240,
                     MajorityEnforceBlockUpgrade = 51,
@@ -172,6 +164,8 @@ namespace NBitcoin.Dash
                     Nonce = 3861367235,
                 }))
                 .BuildAndRegister();
+
+                return _testnet;
             }
         }
 
